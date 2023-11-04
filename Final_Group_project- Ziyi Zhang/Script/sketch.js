@@ -32,9 +32,6 @@ function setup() {
   background(220);
 }
 
-let PacmanDirection = "right"; // Set initial direction to right
-let GhostDirection = "up";  // Set initial direction to up
-
 function movePacman() {
   if (PacmanDirection === "right") {
     if (PacmanXpos + 5 < 600) {
