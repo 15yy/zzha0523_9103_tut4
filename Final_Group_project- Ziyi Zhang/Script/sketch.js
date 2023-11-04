@@ -25,12 +25,54 @@ let GhostYpos = 0;
 let eyeWidth = 25;
 let eyeHeight = 25; 
 
+let PacmanInterval;
+let GhostInterval;
+
 function setup() {
   background(220);
 }
 
+let PacmanDirection = "right"; // Set initial direction to right
+let GhostDirection = "up";  // Set initial direction to up
+
+function movePacman() {
+  if (PacmanDirection === "right") {
+    if (PacmanXpos + 5 < 600) {
+      PacmanXpos += 5; //kepp moving to right
+    } else {
+      //After reaching the boundary, change to the opposite direction
+      PacmanDirection = "left";
+    }
+  } else if (PacmanDirection === "left") {
+    if (PacmanXpos - 5 >= 0) {
+      PacmanXpos -= 5; // kepp moving to left
+    } else {
+      // After reaching the boundary, change to the opposite direction
+      PacmanDirection = "right";
+    }
+  }
+}
+
+function moveGhost() {
+  if (GhostDirection === "up") {
+    if (GhostYpos - 5 >= 0) {
+      GhostYpos -= 5; // kepp moving to up
+    } else {
+      // After reaching the boundary, change to the opposite direction
+      GhostDirection = "down";
+    }
+  } else if (GhostDirection === "down") {
+    if (GhostYpos + 5 < 600) {
+      GhostYpos += 5; // kepp moving to down
+    } else {
+      // After reaching the boundary, change to the opposite direction
+      GhostDirection = "up";
+    }
+  }
+}
 
 function draw() {
+  clear();
   createCanvas(CanvasSize, CanvasSize);
   colorMode(RGB);
   background(255,255,20);
@@ -40,6 +82,9 @@ function draw() {
   GenerateTrees(20)
   Generateghost(200*Size,300*Size,Size)
   //DrawTrees(200,200,1)
+  // Redraw Pacman and Ghost
+  DrawPacMan(PacmanXpos * Size, PacmanYpos * Size, Size);
+  Drawghost(GhostXpos * Size, GhostYpos * Size, Size);
   Respond();
 }
 
